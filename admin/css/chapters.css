@@ -1,0 +1,935 @@
+/* =========================
+   CHAPTER MANAGEMENT
+   ========================= */
+
+.chapters-content {
+    padding: 32px;
+    background: #f7f7f7;
+    min-height: calc(100vh - 72px);
+}
+
+
+/* =========================
+   PAGE HEADER
+   ========================= */
+
+.chapters-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.heading-copy h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #111;
+}
+
+.heading-copy p {
+    margin: 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.heading-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* =========================
+   HEADER BUTTONS
+   ========================= */
+
+.add-chapter-button,
+.bulk-upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.add-chapter-button {
+    background: #111;
+    color: #fff;
+}
+
+.add-chapter-button:hover {
+    background: #2a2a2a;
+}
+
+.bulk-upload-button {
+    background: #fff;
+    color: #111;
+    border: 1px solid #ddd;
+}
+
+.bulk-upload-button:hover {
+    border-color: #aaa;
+    background: #fafafa;
+}
+
+.add-chapter-button svg,
+.bulk-upload-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================
+   STAT CARDS
+   ========================= */
+
+.chapter-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.chapter-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 18px;
+
+    background: #fff;
+
+    border: 1px solid #e9e9e9;
+    border-radius: 14px;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.stat-icon svg {
+    width: 19px;
+    height: 19px;
+    color: #222;
+}
+
+.chapter-stat-card span {
+    display: block;
+    margin-bottom: 3px;
+
+    font-size: 12px;
+    color: #888;
+}
+
+.chapter-stat-card strong {
+    display: block;
+
+    font-size: 21px;
+    font-weight: 600;
+    color: #111;
+}
+
+
+/* =========================
+   TABLE CARD
+   ========================= */
+
+.chapters-card {
+    background: #fff;
+
+    border: 1px solid #e7e7e7;
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   TOOLBAR
+   ========================= */
+
+.chapter-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 18px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.chapter-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-select {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-width: 170px;
+
+    border: 1px solid #ddd;
+    border-radius: 9px;
+
+    background: #fff;
+}
+
+.filter-select svg {
+    position: absolute;
+    left: 12px;
+
+    width: 16px;
+    height: 16px;
+
+    color: #777;
+
+    pointer-events: none;
+}
+
+.filter-select select {
+    width: 100%;
+
+    min-height: 42px;
+
+    padding: 0 34px 0 36px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: #333;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   SEARCH
+   ========================= */
+
+.chapter-search {
+    position: relative;
+    width: 240px;
+}
+
+.chapter-search svg {
+    position: absolute;
+    top: 50%;
+    left: 13px;
+
+    width: 16px;
+    height: 16px;
+
+    color: #888;
+
+    transform: translateY(-50%);
+}
+
+.chapter-search input {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 14px 0 38px;
+
+    border: 1px solid #ddd;
+    border-radius: 9px;
+
+    outline: none;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+
+    box-sizing: border-box;
+}
+
+.chapter-search input:focus {
+    border-color: #aaa;
+}
+
+
+/* =========================
+   TABLE
+   ========================= */
+
+.chapter-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.chapter-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    min-width: 800px;
+}
+
+.chapter-table th {
+    padding: 14px 18px;
+
+    background: #fafafa;
+
+    border-bottom: 1px solid #eee;
+
+    text-align: left;
+
+    font-size: 11px;
+    font-weight: 600;
+    color: #777;
+
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.chapter-table td {
+    padding: 16px 18px;
+
+    border-bottom: 1px solid #f0f0f0;
+
+    font-size: 13px;
+    color: #333;
+}
+
+.chapter-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.chapter-table tbody tr:hover:not(.empty-row) {
+    background: #fcfcfc;
+}
+
+
+/* =========================
+   CHAPTER NUMBER
+   ========================= */
+
+.chapter-number {
+    font-weight: 600;
+    color: #111;
+}
+
+
+/* =========================
+   NOVEL NAME
+   ========================= */
+
+.chapter-novel {
+    font-weight: 500;
+    color: #222;
+}
+
+.chapter-title {
+    display: block;
+    margin-top: 2px;
+
+    font-size: 11px;
+    color: #999;
+}
+
+
+/* =========================
+   STATUS BADGE
+   ========================= */
+
+.chapter-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.chapter-status::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+}
+
+.chapter-status.published {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.chapter-status.published::before {
+    background: #333;
+}
+
+.chapter-status.scheduled {
+    background: #f5f5f5;
+    color: #555;
+}
+
+.chapter-status.scheduled::before {
+    background: #777;
+}
+
+.chapter-status.draft {
+    background: #fafafa;
+    color: #888;
+}
+
+.chapter-status.draft::before {
+    background: #aaa;
+}
+
+
+/* =========================
+   DATE
+   ========================= */
+
+.publish-date {
+    font-size: 12px;
+    color: #444;
+}
+
+.publish-date.empty {
+    color: #aaa;
+}
+
+
+/* =========================
+   ACTION BUTTON
+   ========================= */
+
+.chapter-action {
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+
+    background: #fff;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.chapter-action:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.chapter-action svg {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================
+   EMPTY STATE
+   ========================= */
+
+.empty-row td {
+    padding: 0;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 340px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+}
+
+.empty-icon {
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 14px;
+
+    background: #f5f5f5;
+}
+
+.empty-icon svg {
+    width: 23px;
+    height: 23px;
+
+    color: #555;
+}
+
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #222;
+}
+
+.empty-state p {
+    max-width: 420px;
+
+    margin: 0 0 20px;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    color: #999;
+}
+
+.empty-actions {
+    display: flex;
+    gap: 9px;
+}
+
+.empty-add-button,
+.empty-bulk-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    min-height: 38px;
+    padding: 0 13px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.empty-add-button {
+    background: #111;
+    color: #fff;
+}
+
+.empty-bulk-button {
+    border: 1px solid #ddd;
+    color: #333;
+    background: #fff;
+}
+
+.empty-add-button svg,
+.empty-bulk-button svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================
+   PAGINATION
+   ========================= */
+
+.chapter-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+
+    border-top: 1px solid #eee;
+}
+
+.chapter-pagination > span {
+    font-size: 11px;
+    color: #999;
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.pagination-button {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    background: #fff;
+
+    cursor: pointer;
+}
+
+.pagination-button:hover:not(:disabled) {
+    background: #f5f5f5;
+}
+
+.pagination-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-button svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1100px) {
+
+    .chapter-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .chapters-content {
+        padding: 22px;
+    }
+
+    .chapters-heading {
+        flex-direction: column;
+    }
+
+    .heading-actions {
+        width: 100%;
+    }
+
+    .add-chapter-button,
+    .bulk-upload-button {
+        flex: 1;
+    }
+
+    .chapter-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .chapter-filters {
+        width: 100%;
+    }
+
+    .filter-select {
+        flex: 1;
+    }
+
+    .chapter-search {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .chapter-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .chapters-content {
+        padding: 16px;
+    }
+
+    .heading-actions {
+        flex-direction: column;
+    }
+
+    .add-chapter-button,
+    .bulk-upload-button {
+        width: 100%;
+    }
+
+    .chapter-filters {
+        flex-direction: column;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    .empty-actions {
+        flex-direction: column;
+    }
+
+}
+
+/* =========================================
+   TOPBAR FIX
+   ========================================= */
+
+.main {
+    min-width: 0;
+}
+
+
+/* TOPBAR */
+
+.topbar {
+    min-height: 96px;
+    height: 96px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 32px;
+
+    box-sizing: border-box;
+}
+
+
+/* LEFT SIDE */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    min-width: 0;
+}
+
+
+/* MENU BUTTON */
+
+.topbar-left .menu-btn {
+    flex-shrink: 0;
+}
+
+
+/* BREADCRUMB */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    white-space: nowrap;
+}
+
+.breadcrumb a,
+.breadcrumb strong {
+    display: inline-flex;
+    align-items: center;
+}
+
+.breadcrumb svg {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+}
+
+
+/* RIGHT SIDE */
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    flex-shrink: 0;
+}
+
+
+/* SEARCH */
+
+.global-search {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 240px;
+}
+
+.global-search input {
+    width: 100%;
+    height: 40px;
+
+    padding: 0 40px 0 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ddd;
+    border-radius: 9px;
+
+    outline: none;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+
+    background: #fff;
+}
+
+.global-search input:focus {
+    border-color: #aaa;
+}
+
+.global-search svg {
+    position: absolute;
+
+    right: 13px;
+
+    width: 17px;
+    height: 17px;
+
+    color: #777;
+
+    pointer-events: none;
+}
+
+
+/* PROFILE */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.profile > img {
+    width: 40px;
+    height: 40px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    line-height: 1.25;
+}
+
+.profile-info strong {
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.profile-info span {
+    margin-top: 3px;
+
+    font-size: 11px;
+    color: #888;
+
+    white-space: nowrap;
+}
+
+.profile-arrow {
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   SIDEBAR LOGO FIX
+   ========================================= */
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+
+    min-height: 76px;
+
+    padding: 0 22px;
+
+    box-sizing: border-box;
+}
+
+.sidebar .logo img {
+    width: 42px;
+    height: 42px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+.sidebar .logo > div {
+    margin-left: 12px;
+}
+
+.sidebar .logo h2 {
+    margin: 0;
+
+    font-size: 21px;
+    line-height: 1.05;
+}
+
+.sidebar .logo span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 10px;
+    line-height: 1;
+}
+
+
+/* =========================================
+   SIDEBAR MENU - FINAL POSITION
+   ========================================= */
+
+/* =========================================
+   CHAPTER CONTENT
+   ========================================= */
+
+.chapters-content {
+    padding-top: 28px;
+}
+
