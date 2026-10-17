@@ -374,25 +374,30 @@
 </head>
 <body>
 
-    <!-- Header / Navbar -->
     <header class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <img src="images/logo.png" alt="Lazy Mochi">
-            <span>Lazy Mochi</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="novels.html" class="active">Novels</a></li>
-            <li><a href="genres.html">Genres</a></li>
-            <li><a href="latest.html">Latest</a></li>
-            <li><a href="bookmarks.html">Bookmarks</a></li>
-        </ul>
-        
-        <!-- Bagian Kanan Navbar (Dinamis: Guest vs User Dropdown) -->
-        <div class="navbar-right" id="navAuthArea">
-            <span style="font-size: 13px; color: #777;">Loading...</span>
-        </div>
-    </header>
+    <a href="index.html" class="navbar-brand">
+        <img src="images/logo.png" alt="Lazy Mochi">
+        <span>Lazy Mochi</span>
+    </a>
+
+    <!-- Tombol Hamburger Mobile -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+        ☰
+    </button>
+
+    <!-- Nav Links dengan ID navLinks -->
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="novels.html">Novels</a></li>
+        <li><a href="genres.html">Genres</a></li>
+        <li><a href="latest.html">Latest</a></li>
+        <li><a href="bookmarks.html">Bookmarks</a></li>
+    </ul>
+
+    <div class="navbar-right" id="navAuthArea">
+        <span style="font-size: 13px; color: #777;">Loading...</span>
+    </div>
+</header>
 
     <div class="container">
         <!-- Title Section -->

@@ -22,40 +22,29 @@
 </head>
 
 <body>
+<header class="navbar">
+    <a href="index.html" class="navbar-brand">
+        <img src="images/logo.png" alt="Lazy Mochi">
+        <span>Lazy Mochi</span>
+    </a>
 
-<header class="header">
+    <!-- Tombol Hamburger Mobile -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+        ☰
+    </button>
 
-    <nav class="navbar">
+    <!-- Nav Links dengan ID navLinks -->
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="novels.html">Novels</a></li>
+        <li><a href="genres.html">Genres</a></li>
+        <li><a href="latest.html">Latest</a></li>
+        <li><a href="bookmarks.html">Bookmarks</a></li>
+    </ul>
 
-        <a href="index.html" class="logo">
-
-            <img src="images/logo.png">
-
-            <span>Lazy Mochi</span>
-
-        </a>
-
-        <ul class="nav-menu">
-
-            <li><a href="index.html">Home</a></li>
-
-            <li><a href="#">Novels</a></li>
-
-            <li><a href="#">Genres</a></li>
-
-            <li><a href="#">Latest</a></li>
-
-            <li><a href="#">Bookmarks</a></li>
-
-        </ul>
-
-        <button class="search-btn">
-
-        <i data-lucide="search"></i>
-
-        </button>
-    </nav>
-
+    <div class="navbar-right" id="navAuthArea">
+        <span style="font-size: 13px; color: #777;">Loading...</span>
+    </div>
 </header>
 
 <main class="login-page">

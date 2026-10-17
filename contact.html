@@ -254,23 +254,30 @@
 </head>
 <body>
 
-    <!-- Header / Navbar -->
     <header class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <img src="images/logo.png" alt="Lazy Mochi">
-            <span>Lazy Mochi</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="novels.html">Novels</a></li>
-            <li><a href="genres.html">Genres</a></li>
-            <li><a href="latest.html">Latest</a></li>
-            <li><a href="bookmarks.html">Bookmarks</a></li>
-        </ul>
-        <div class="navbar-right" id="navAuthArea">
-            <span style="font-size: 13px; color: #777;">Loading...</span>
-        </div>
-    </header>
+    <a href="index.html" class="navbar-brand">
+        <img src="images/logo.png" alt="Lazy Mochi">
+        <span>Lazy Mochi</span>
+    </a>
+
+    <!-- Tombol Hamburger Mobile -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+        ☰
+    </button>
+
+    <!-- Nav Links dengan ID navLinks -->
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="novels.html">Novels</a></li>
+        <li><a href="genres.html">Genres</a></li>
+        <li><a href="latest.html">Latest</a></li>
+        <li><a href="bookmarks.html">Bookmarks</a></li>
+    </ul>
+
+    <div class="navbar-right" id="navAuthArea">
+        <span style="font-size: 13px; color: #777;">Loading...</span>
+    </div>
+</header>
 
     <div class="container">
         <div class="page-header">
@@ -290,29 +297,30 @@
                 </div>
             </div>
 
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="contactName">Your Name</label>
-                    <input type="text" id="contactName" class="form-control" placeholder="Enter your name" required>
-                </div>
+            <form class="contact-form" action="https://formspree.io/f/xljgzryl" method="POST">
+    <div class="form-group">
+                <label for="contactName">Your Name</label>
+                <input type="text" name="name" id="contactName" class="form-control" placeholder="Enter your name" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="contactEmail">Your Email</label>
-                    <input type="email" id="contactEmail" class="form-control" placeholder="Enter your email address" required>
-                </div>
+            <div class="form-group">
+                <label for="contactEmail">Your Email</label>
+                <!-- Atribut name="_replyto" atau "email" membuat kamu bisa langsung membalas email pengirim dari inbox -->
+                <input type="email" name="_replyto" id="contactEmail" class="form-control" placeholder="Enter your email address" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="contactSubject">Subject</label>
-                    <input type="text" id="contactSubject" class="form-control" placeholder="What is this regarding?" required>
-                </div>
+            <div class="form-group">
+                <label for="contactSubject">Subject</label>
+                <input type="text" name="subject" id="contactSubject" class="form-control" placeholder="What is this regarding?" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="contactMessage">Message</label>
-                    <textarea id="contactMessage" class="form-control" placeholder="Write your message here..." required></textarea>
-                </div>
+            <div class="form-group">
+                <label for="contactMessage">Message</label>
+                <textarea name="message" id="contactMessage" class="form-control" placeholder="Write your message here..." required></textarea>
+            </div>
 
-                <button type="submit" class="btn-submit" id="btnSubmitContact">Send Message</button>
-            </form>
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
         </div>
     </div>
 
