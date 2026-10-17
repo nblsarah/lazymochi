@@ -252,3 +252,18 @@ function escapeHTML(str) {
 }
 
 initPage();
+
+// Global Handler untuk Mobile Nav Toggle
+const mobileNavToggle = document.getElementById("mobileNavToggle");
+const navLinks = document.getElementById("navLinks");
+
+mobileNavToggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navLinks?.classList.toggle("show");
+});
+
+document.addEventListener("click", (e) => {
+    if (!mobileNavToggle?.contains(e.target) && !navLinks?.contains(e.target)) {
+        navLinks?.classList.remove("show");
+    }
+});
