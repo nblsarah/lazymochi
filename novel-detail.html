@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Details | Lazy Mochi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --card-bg: #121316;
+            --card-hover: #1a1c21;
+            --input-bg: #181a1f;
+            --text-main: #ffffff;
+            --text-muted: #9e9ea7;
+            --border-color: #23262d;
+            --accent-gold: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 5%;
+            border-bottom: 1px solid #111;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar-brand img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        /* User Dropdown */
+        .user-dropdown-wrapper { position: relative; display: inline-block; }
+        .user-dropdown-btn {
+            background: transparent; border: none; color: #fff; font-family: inherit;
+            font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            gap: 8px; padding: 6px 12px; border-radius: 20px; transition: background 0.2s;
+        }
+        .user-dropdown-btn:hover { background: #1a1c21; }
+        .user-dropdown-btn img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+        .user-dropdown-menu {
+            position: absolute; top: 100%; right: 0; margin-top: 8px; background: #121316;
+            border: 1px solid #23262d; border-radius: 12px; width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none; flex-direction: column; overflow: hidden; z-index: 100;
+        }
+        .user-dropdown-menu.show { display: flex; }
+        .user-dropdown-menu a, .user-dropdown-menu button {
+            padding: 10px 16px; color: #cccccc; text-decoration: none; font-size: 13px; background: none;
+            border: none; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;
+        }
+        .user-dropdown-menu a:hover, .user-dropdown-menu button:hover { background: #1f2229; color: #ffffff; }
+
+        .auth-btn-group { display: flex; align-items: center; gap: 12px; }
+        .btn-login { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .btn-register { background: #ffffff; color: #000000; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; }
+
+        /* Container & Detail Hero Section */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { color: #fff; }
+
+        .novel-detail-card {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 36px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .detail-cover-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            aspect-ratio: 2/3;
+            background: #181a1f;
+        }
+
+        .detail-cover-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-title {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            line-height: 1.2;
+        }
+
+        .detail-alt-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0 0 16px 0;
+            font-style: italic;
+        }
+
+        .detail-meta-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .meta-pill {
+            background: #181a1f;
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #d1d5db;
+        }
+
+        .meta-pill.status-completed { color: #2dd4bf; border-color: rgba(45, 212, 191, 0.3); }
+        .meta-pill.status-ongoing { color: #fb923c; border-color: rgba(251, 146, 60, 0.3); }
+
+        .stats-summary {
+            display: flex;
+            gap: 24px;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-item span { font-size: 11px; color: var(--text-muted); }
+        .stat-item strong { font-size: 16px; font-weight: 600; color: #fff; }
+
+        /* User Rating Input Styling */
+        .star-rating-input span {
+            transition: color 0.2s, transform 0.1s;
+            user-select: none;
+        }
+        .star-rating-input span:hover,
+        .star-rating-input span.hovered,
+        .star-rating-input span.selected {
+            color: var(--accent-gold) !important;
+        }
+        .star-rating-input span:active {
+            transform: scale(1.25);
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .btn-action-primary {
+            background: #ffffff;
+            color: #000000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action-primary:hover { opacity: 0.9; }
+
+        .btn-action-secondary {
+            background: #181a1f;
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-action-secondary:hover { background: #23262d; }
+        .btn-action-secondary.bookmarked { color: #ef4444; border-color: #ef4444; }
+
+        .synopsis-box h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .synopsis-box p {
+            font-size: 14px;
+            color: #c0c4cc;
+            line-height: 1.8;
+            margin: 0;
+            white-space: pre-line;
+        }
+
+        /* Chapter List Section */
+        .chapter-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px;
+        }
+
+        .chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .chapter-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .chapter-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .chapter-controls input {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 14px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .btn-sort-toggle {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .chapter-item {
+            background: #181a1f;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #d1d5db;
+            transition: all 0.2s;
+        }
+
+        .chapter-item:hover {
+            background: #23262d;
+            color: #ffffff;
+            border-color: #3b3e47;
+        }
+
+        .chapter-item-title {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .chapter-item-date {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 850px) {
+            .novel-detail-card { grid-template-columns: 1fr; }
+            .chapter-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <img src="images/logo.png" alt="Lazy Mochi">
+            <span>Lazy Mochi</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novels.html" class="active">Novels</a></li>
+            <li><a href="genres.html">Genres</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+        </ul>
+        <div class="navbar-right" id="navAuthArea">
+            <span style="font-size: 13px; color: #777;">Loading...</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &gt;
+            <a href="novels.html">Novels</a> &gt;
+            <span id="breadcrumbTitle">Loading novel...</span>
+        </div>
+
+        <!-- Novel Detail Hero Card -->
+        <div class="novel-detail-card">
+            <div class="detail-cover-wrapper">
+                <img id="novelCoverImg" src="images/cover-placeholder.jpg" alt="Novel Cover">
+            </div>
+
+            <div class="detail-info">
+                <h1 class="detail-title" id="novelTitle">Loading...</h1>
+                <p class="detail-alt-title" id="novelAltTitle"></p>
+
+                <div class="detail-meta-pills">
+                    <span class="meta-pill" id="novelStatusPill">Ongoing</span>
+                    <span class="meta-pill" id="novelAuthorPill">Author: -</span>
+                    <span class="meta-pill" id="novelLangPill">Language: -</span>
+                    <span class="meta-pill" id="novelYearPill">Year: -</span>
+                </div>
+
+                <!-- Summary Statistics -->
+                <div class="stats-summary">
+                    <div class="stat-item">
+                        <span>Chapters</span>
+                        <strong id="statChapterCount">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Views</span>
+                        <strong id="statViews">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Bookmarks</span>
+                        <strong id="statBookmarks">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Average Rating</span>
+                        <strong id="statRating">★ 0.0 <small style="font-size: 11px; color: #888;" id="statRatingCount">(0 reviews)</small></strong>
+                    </div>
+                </div>
+
+                <!-- User Rating Box -->
+                <div class="user-rating-box" style="background: #181a1f; border: 1px solid var(--border-color); padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <strong style="font-size: 14px; display: block;">Rate This Novel:</strong>
+                        <span style="font-size: 12px; color: var(--text-muted);" id="userRatingStatus">Click stars to give a score</span>
+                    </div>
+                    <div class="star-rating-input" id="starRatingGroup" style="display: flex; gap: 6px; font-size: 24px; cursor: pointer; color: #4b5563;">
+                        <span data-value="1">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
+                </div>
+
+                <div class="detail-actions">
+                    <a href="#" class="btn-action-primary" id="btnStartReading">
+                        ▶ Start Reading Ch.1
+                    </a>
+                    <button type="button" class="btn-action-secondary" id="btnBookmark">
+                        ❤️ Bookmark
+                    </button>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div id="genresList" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                </div>
+
+                <div class="synopsis-box">
+                    <h3>Synopsis</h3>
+                    <p id="novelSynopsis">Loading synopsis...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter List Section -->
+        <div class="chapter-section">
+            <div class="chapter-header">
+                <h2>Chapter List (<span id="totalChaptersLabel">0</span>)</h2>
+                <div class="chapter-controls">
+                    <input type="search" id="chapterSearchInput" placeholder="Search chapter...">
+                    <button type="button" class="btn-sort-toggle" id="btnToggleSort">Order: Newest ▼</button>
+                </div>
+            </div>
+
+            <div class="chapter-grid" id="chapterListGrid">
+                <p style="grid-column: 1/-1; text-align: center; color: #777;">Loading chapter list...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/novel-detail.js"></script>
+</body>
+<!-- Public Site Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="dmca.html">DMCA</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+        </ul>
+        <p class="footer-copyright">
+            Copyright © 2026 - All rights reserved by Lazy Mochi
+        </p>
+    </div>
+</footer>
+</html>

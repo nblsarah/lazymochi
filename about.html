@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Lazy Mochi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --card-bg: #121316;
+            --card-hover: #1a1c21;
+            --input-bg: #181a1f;
+            --text-main: #ffffff;
+            --text-muted: #9e9ea7;
+            --border-color: #23262d;
+            --accent-gold: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 5%;
+            border-bottom: 1px solid #111;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar-brand img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        /* User Dropdown */
+        .user-dropdown-wrapper { position: relative; display: inline-block; }
+        .user-dropdown-btn {
+            background: transparent; border: none; color: #fff; font-family: inherit;
+            font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            gap: 8px; padding: 6px 12px; border-radius: 20px; transition: background 0.2s;
+        }
+        .user-dropdown-btn:hover { background: #1a1c21; }
+        .user-dropdown-btn img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+        .user-dropdown-menu {
+            position: absolute; top: 100%; right: 0; margin-top: 8px; background: #121316;
+            border: 1px solid #23262d; border-radius: 12px; width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none; flex-direction: column; overflow: hidden; z-index: 100;
+        }
+        .user-dropdown-menu.show { display: flex; }
+        .user-dropdown-menu a, .user-dropdown-menu button {
+            padding: 10px 16px; color: #cccccc; text-decoration: none; font-size: 13px; background: none;
+            border: none; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;
+        }
+        .user-dropdown-menu a:hover, .user-dropdown-menu button:hover { background: #1f2229; color: #ffffff; }
+
+        .auth-btn-group { display: flex; align-items: center; gap: 12px; }
+        .btn-login { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .btn-register { background: #ffffff; color: #000000; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Content Card */
+        .about-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .about-card h2 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .about-card p {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .feature-item {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 16px;
+            color: var(--accent-gold);
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #121316;
+            border-top: 1px solid #23262d;
+            padding: 32px 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links a {
+            color: #9e9ea7;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover,
+        .footer-links a.active {
+            color: #ffffff;
+        }
+
+        .footer-copyright {
+            color: #71717a;
+            font-size: 12px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <img src="images/logo.png" alt="Lazy Mochi">
+            <span>Lazy Mochi</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novels.html">Novels</a></li>
+            <li><a href="genres.html">Genres</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+        </ul>
+        <div class="navbar-right" id="navAuthArea">
+            <span style="font-size: 13px; color: #777;">Loading...</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>About Lazy Mochi</h1>
+            <p>Your ultimate destination for reading light novels and web novels online.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Welcome to Lazy Mochi</h2>
+            <p>
+                Lazy Mochi is a modern, community-driven platform designed for novel enthusiasts around the world. Our mission is to provide readers with a clean, seamless, and enjoyable reading experience across all devices.
+            </p>
+            <p>
+                Whether you enjoy immersive fantasy adventures, heartwarming romances, intense action sagas, or captivating sci-fi stories, Lazy Mochi brings you an ever-growing library of translations and original stories.
+            </p>
+
+            <h2 style="margin-top: 32px;">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>📚 Vast Library</h3>
+                    <p>Explore a rich collection of novels across multiple genres, updated regularly with fresh chapters.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>❤️ Custom Bookmarks</h3>
+                    <p>Save your favorite novels to your personal library so you never lose track of where you left off.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>⭐ Community Ratings</h3>
+                    <p>Share your thoughts and rate novels to help fellow readers discover top-tier stories.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📱 Reader Friendly</h3>
+                    <p>Customizable font sizes, sleek dark theme, and progress tracking for comfortable late-night reading.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Public Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <ul class="footer-links">
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dmca.html">DMCA</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Use</a></li>
+            </ul>
+            <p class="footer-copyright">
+                Copyright © 2026 - All rights reserved by Lazy Mochi
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/about.js"></script>
+</body>
+</html>

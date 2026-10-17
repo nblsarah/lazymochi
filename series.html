@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series List | Lazy Mochi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --card-bg: #121316;
+            --input-bg: #181a1f;
+            --text-main: #ffffff;
+            --text-muted: #9e9ea7;
+            --border-color: #23262d;
+            --accent-gold: #f59e0b;
+            --filter-box-bg: #1a221a;
+            --filter-active-color: #86efac;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 5%;
+            border-bottom: 1px solid #111;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar-brand img { width: 36px; height: 36px; }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+        /* User Dropdown */
+        .user-dropdown-wrapper { position: relative; display: inline-block; }
+        .user-dropdown-btn {
+            background: transparent; border: none; color: #fff; font-family: inherit;
+            font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            gap: 8px; padding: 6px 12px; border-radius: 20px; transition: background 0.2s;
+        }
+        .user-dropdown-btn:hover { background: #1a1c21; }
+        .user-dropdown-btn img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+        .user-dropdown-menu {
+            position: absolute; top: 100%; right: 0; margin-top: 8px; background: #121316;
+            border: 1px solid #23262d; border-radius: 12px; width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none; flex-direction: column; overflow: hidden; z-index: 100;
+        }
+        .user-dropdown-menu.show { display: flex; }
+        .user-dropdown-menu a, .user-dropdown-menu button {
+            padding: 10px 16px; color: #cccccc; text-decoration: none; font-size: 13px; background: none;
+            border: none; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;
+        }
+        .user-dropdown-menu a:hover, .user-dropdown-menu button:hover { background: #1f2229; color: #ffffff; }
+
+        .auth-btn-group { display: flex; align-items: center; gap: 12px; }
+        .btn-login { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .btn-register { background: #ffffff; color: #000000; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+            color: #fff;
+        }
+
+        /* Filter Box Style */
+        .series-filter-box {
+            background-color: var(--filter-box-bg);
+            border: 1px solid #283828;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            color: #ffffff;
+            min-width: 80px;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-opt {
+            color: #a3b8a3;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+            user-select: none;
+        }
+
+        .filter-opt:hover { color: #ffffff; }
+
+        .filter-opt.active {
+            color: var(--filter-active-color);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .badge-new {
+            background: #ef4444;
+            color: #fff;
+            font-size: 9px;
+            padding: 1px 4px;
+            border-radius: 4px;
+            margin-left: 2px;
+            vertical-align: super;
+        }
+
+        /* Series List Grid */
+        .series-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            gap: 24px;
+        }
+
+        .series-item-card {
+            display: flex;
+            gap: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .series-item-card:hover {
+            transform: translateY(-3px);
+            border-color: #3b3e47;
+        }
+
+        .series-cover {
+            width: 110px;
+            height: 155px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #181a1f;
+        }
+
+        .series-content {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .series-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+            color: #ffffff;
+            text-decoration: none;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .series-title:hover { color: var(--accent-gold); }
+
+        .series-status-pill {
+            display: inline-block;
+            background: rgba(45, 212, 191, 0.15);
+            color: #2dd4bf;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 12px;
+            width: fit-content;
+            margin-bottom: 10px;
+        }
+
+        .series-status-pill.ongoing {
+            background: rgba(251, 146, 60, 0.15);
+            color: #fb923c;
+        }
+
+        .series-synopsis {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .series-list-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <img src="images/logo.png" alt="Lazy Mochi">
+            <span>Lazy Mochi</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novels.html">Novels</a></li>
+            <li><a href="genres.html">Genres</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+        </ul>
+        <div class="navbar-right" id="navAuthArea">
+            <span style="font-size: 13px; color: #777;">Loading...</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Series List</h1>
+        </div>
+
+        <!-- Green Custom Filter Box -->
+        <div class="series-filter-box">
+            <!-- Status Row -->
+            <div class="filter-row">
+                <span class="filter-label">Status:</span>
+                <div class="filter-options" id="filterStatusGroup">
+                    <span class="filter-opt active" data-value="all">All</span>
+                    <span class="filter-opt" data-value="ongoing">OnGoing</span>
+                    <span class="filter-opt" data-value="completed">Completed</span>
+                </div>
+            </div>
+
+            <!-- Sort By Row -->
+            <div class="filter-row">
+                <span class="filter-label">Sort By:</span>
+                <div class="filter-options" id="filterSortGroup">
+                    <span class="filter-opt active" data-value="published">Published At</span>
+                    <span class="filter-opt" data-value="updated">Updated At</span>
+                    <span class="filter-opt" data-value="popular">Popular</span>
+                </div>
+            </div>
+
+            <!-- Order Row -->
+            <div class="filter-row">
+                <span class="filter-label">Order:</span>
+                <div class="filter-options" id="filterOrderGroup">
+                    <span class="filter-opt active" data-value="desc">Descending</span>
+                    <span class="filter-opt" data-value="asc">Ascending</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Novels Grid -->
+        <div class="series-list-grid" id="seriesListGrid">
+            <div class="empty-state">
+                <p>Loading novels...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Public Site Footer -->
+    <footer class="site-footer" style="background-color: #121316; border-top: 1px solid #23262d; padding: 32px 20px; margin-top: 60px; text-align: center;">
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+            <ul style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; list-style: none; margin: 0; padding: 0;">
+                <li><a href="about.html" style="color: #9e9ea7; text-decoration: none; font-size: 13px;">About Us</a></li>
+                <li><a href="contact.html" style="color: #9e9ea7; text-decoration: none; font-size: 13px;">Contact</a></li>
+                <li><a href="dmca.html" style="color: #9e9ea7; text-decoration: none; font-size: 13px;">DMCA</a></li>
+                <li><a href="privacy.html" style="color: #9e9ea7; text-decoration: none; font-size: 13px;">Privacy Policy</a></li>
+                <li><a href="terms.html" style="color: #9e9ea7; text-decoration: none; font-size: 13px;">Terms of Use</a></li>
+            </ul>
+            <p style="color: #71717a; font-size: 12px; margin: 0;">
+                Copyright © 2026 - All rights reserved by Lazy Mochi
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/series.js"></script>
+</body>
+</html>

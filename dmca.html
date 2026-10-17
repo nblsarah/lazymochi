@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMCA Disclaimer | Lazy Mochi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --card-bg: #121316;
+            --input-bg: #181a1f;
+            --text-main: #ffffff;
+            --text-muted: #9e9ea7;
+            --border-color: #23262d;
+            --accent-gold: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 5%;
+            border-bottom: 1px solid #111;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar-brand img { width: 36px; height: 36px; }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+        /* User Dropdown */
+        .user-dropdown-wrapper { position: relative; display: inline-block; }
+        .user-dropdown-btn {
+            background: transparent; border: none; color: #fff; font-family: inherit;
+            font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            gap: 8px; padding: 6px 12px; border-radius: 20px; transition: background 0.2s;
+        }
+        .user-dropdown-btn:hover { background: #1a1c21; }
+        .user-dropdown-btn img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+        .user-dropdown-menu {
+            position: absolute; top: 100%; right: 0; margin-top: 8px; background: #121316;
+            border: 1px solid #23262d; border-radius: 12px; width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none; flex-direction: column; overflow: hidden; z-index: 100;
+        }
+        .user-dropdown-menu.show { display: flex; }
+        .user-dropdown-menu a, .user-dropdown-menu button {
+            padding: 10px 16px; color: #cccccc; text-decoration: none; font-size: 13px; background: none;
+            border: none; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;
+        }
+        .user-dropdown-menu a:hover, .user-dropdown-menu button:hover { background: #1f2229; color: #ffffff; }
+
+        .auth-btn-group { display: flex; align-items: center; gap: 12px; }
+        .btn-login { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .btn-register { background: #ffffff; color: #000000; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .content-card p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .content-card ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-card li {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #c0c4cc;
+        }
+
+        .contact-email {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #121316;
+            border-top: 1px solid #23262d;
+            padding: 32px 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links a {
+            color: #9e9ea7;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover, .footer-links a.active {
+            color: #ffffff;
+        }
+
+        .footer-copyright {
+            color: #71717a;
+            font-size: 12px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <img src="images/logo.png" alt="Lazy Mochi">
+            <span>Lazy Mochi</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novels.html">Novels</a></li>
+            <li><a href="genres.html">Genres</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+        </ul>
+        <div class="navbar-right" id="navAuthArea">
+            <span style="font-size: 13px; color: #777;">Loading...</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>DMCA Disclaimer</h1>
+            <p>Digital Millennium Copyright Act Compliance Policy</p>
+        </div>
+
+        <div class="content-card">
+            <p>
+                <strong>Lazy Mochi</strong> is an online website service provider as defined in the Digital Millennium Copyright Act. We respect copyright laws and will protect the rights of every copyright owner seriously.
+            </p>
+            <p>
+                If you are the owner of any content shown on <strong>Lazy Mochi</strong> and you do not want to allow us to use the content, you are able to inform us via email at <a href="mailto:lazymochitl@gmail.com" class="contact-email">lazymochitl@gmail.com</a> so that we can identify and take the necessary action.
+            </p>
+            <p>
+                We cannot take action if you do not provide us with complete information. Therefore, please send us an email with the following details:
+            </p>
+
+            <ul>
+                <li>File a trademark specification regarding the copyright of the content claimed to be infringed.</li>
+                <li>If claiming infringement for multiple copyrighted works in a single notice, please provide a detailed list including exact website URLs containing the content claimed to be infringing.</li>
+                <li>Provide your full name, phone number, office address, and email address so that we may contact you if necessary.</li>
+                <li>We expect notices to be submitted directly by the real copyright owner, rather than third parties or agents.</li>
+                <li>All information provided must be accurate and submitted under penalty of perjury.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Public Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dmca.html" class="active">DMCA</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Use</a></li>
+            </ul>
+            <p class="footer-copyright">
+                Copyright © 2026 - All rights reserved by Lazy Mochi
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/dmca.js"></script>
+</body>
+</html>

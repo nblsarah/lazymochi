@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Lazy Mochi</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/register.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/public.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <img src="images/logo.png">
+
+            <span>Lazy Mochi</span>
+
+        </a>
+
+        <ul class="nav-menu">
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="#">Novels</a></li>
+
+            <li><a href="#">Genres</a></li>
+
+            <li><a href="#">Latest</a></li>
+
+            <li><a href="#">Bookmarks</a></li>
+
+        </ul>
+
+        <button class="search-btn">
+
+        <i data-lucide="search"></i>
+
+        </button>
+    </nav>
+
+</header>
+
+<main class="login-page">
+
+    <section class="login-card">
+
+        <!-- LEFT -->
+
+        <div class="login-left">
+
+            <h1>Join the Mochi Family!</h1>
+
+            <p>
+
+                Discover new worlds, save your favorites,
+                and continue your reading journey anytime.
+
+            </p>
+
+            <img src="images/hero-cat.png" class="cat">
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="login-right">
+
+            <h2>Create Account</h2>
+
+            <p class="desc">
+
+                Join Lazy Mochi and start your reading journey.
+
+            </p>
+
+            <form id="registerForm">
+
+                <label>Username</label>
+
+                <div class="input-group">
+
+                    <i class="input-icon" data-lucide="user"></i>
+
+                    <input
+                        id="username"
+                        type="text"
+                        placeholder="Choose a username"
+                        required>
+
+                </div>
+
+                <label>Email</label>
+
+                <div class="input-group">
+
+                    <i class="input-icon" data-lucide="mail"></i>
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        required>
+
+                    <span class="input-state"></span>
+
+                </div>
+
+                <label>Password</label>
+
+                <div class="input-group">
+
+                    <i class="input-icon" data-lucide="lock"></i>
+
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="toggle-password">
+
+                        <i class="eye eye-off" data-lucide="eye-off"></i>
+
+                        <i class="eye eye-on hidden" data-lucide="eye"></i>
+
+                    </button>
+
+                </div>
+
+                <label>Confirm Password</label>
+
+                <div class="input-group">
+
+                    <i class="input-icon" data-lucide="lock"></i>
+
+                    <input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="Confirm your password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="toggle-password">
+
+                        <i class="confirm-eye-off" data-lucide="eye-off"></i>
+
+                        <i class="confirm-eye-on hidden" data-lucide="eye"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="password-strength">
+
+                    Password strength:
+                    <span id="strength">
+
+                        Weak
+
+                    </span>
+
+                </div>
+
+                <div class="terms">
+
+                    <label class="checkbox">
+
+                        <input type="checkbox" id="terms">
+
+                        <div class="checkmark"></div>
+
+                        <span class="checkbox-text">
+
+                            I agree to the
+                            <a href="#">Terms of Service</a>
+                            &
+                            <a href="#">Privacy Policy</a>
+
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <button type="submit" class="login-btn">
+
+                    Create Account
+
+                </button> 
+
+            </form>
+
+            <div class="divider">
+
+                <span>or</span>
+
+            </div>
+
+            <button
+                id="googleSignUp"
+                type="button"
+                class="google">
+
+                <img src="images/google.svg">
+
+                Sign up with Google
+
+            </button>
+        
+            <p class="signup">
+
+                Already have an account?
+
+                <a href="login.html">
+
+                    Log In
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <a href="#">Privacy Policy</a>
+
+    <a href="#">Terms of Service</a>
+
+    <a href="#">Contact Us</a>
+
+    <p>
+
+        © 2026 Lazy Mochi
+
+    </p>
+
+</footer>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+lucide.createIcons();
+</script>
+
+<script src="js/login.js"></script>
+
+<script type="module" src="js/register.js"></script>
+</body>
+<!-- Public Site Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="dmca.html">DMCA</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+        </ul>
+        <p class="footer-copyright">
+            Copyright © 2026 - All rights reserved by Lazy Mochi
+        </p>
+    </div>
+</footer>
+</html>
