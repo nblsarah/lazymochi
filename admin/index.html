@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Lazy Mochi CMS</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css">
+    
+    <link
+        rel="stylesheet"
+        href="css/add-novel.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="../images/logo.png">
+
+            <div>
+
+                <h2>Lazy Mochi</h2>
+
+                <span>CMS</span>
+
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a class="active">
+
+                <i data-lucide="layout-dashboard"></i>
+
+                Dashboard
+
+            </a>
+
+            <a
+                href="novels.html">
+
+                <i data-lucide="book-open"></i>
+
+                <span>
+
+                    Novel Management
+
+                </span>
+
+            </a>
+
+            <a
+                href="chapters.html">
+
+                <i data-lucide="file-text"></i>
+
+                <span>
+
+                    Chapter Management
+
+                </span>
+
+            </a>
+
+            <a
+                href="genres.html">
+
+                <i data-lucide="tags"></i>
+
+                <span>
+
+                    Genre Management
+
+                </span>
+
+            </a>
+
+            <a
+                href="users.html">
+
+                <i data-lucide="users"></i>
+
+                <span>Users</span>
+
+            </a>
+
+            <a
+                href="bookmarks.html">
+
+                <i data-lucide="heart"></i>
+
+                <span>Bookmarks</span>
+
+            </a>
+
+            <a
+                href="analytics.html">
+
+                <i data-lucide="bar-chart-3"></i>
+
+                <span>Analytics</span>
+
+            </a>
+
+            <a
+                href="settings.html">
+
+                <i data-lucide="settings"></i>
+
+                <span>Settings</span>
+
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="../index.html" class="back-home">
+
+                <i data-lucide="house"></i>
+
+                Back to Website
+
+            </a>
+
+            <button id="logoutBtn">
+
+                <i data-lucide="log-out"></i>
+
+                Logout
+
+            </button>
+
+            <p>
+
+                © 2026 Lazy Mochi
+
+            </p>
+
+        </div>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- MAIN -->
+    <!-- ========================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <h1>
+
+                <i data-lucide="menu"></i>
+
+                Dashboard
+
+            </h1>
+
+            <div class="top-actions">
+
+                <div class="search-box">
+
+                    <i data-lucide="search"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search anything...">
+
+                </div>
+
+                <div class="profile">
+
+                    <img src="../images/avatar.png">
+
+                    <div>
+
+                        <strong>
+
+                            Sarah Admin
+
+                        </strong>
+
+                        <span>
+
+                            Administrator
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- STATISTIC -->
+
+        <section class="stats">
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="book-open"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>Total Novels</h3>
+
+                <h2 id="totalNovels">0</h2>
+
+                <p id="novelGrowth">
+                    —
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="file-text"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>Total Chapters</h3>
+
+                <h2 id="totalChapters">0</h2>
+
+                <p id="chapterGrowth">
+                    —
+                </p>
+
+            </div>
+            
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="users"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>Total Users</h3>
+
+                <h2 id="totalUsers">0</h2>
+
+                <p id="userGrowth">
+                    —
+                </p>
+
+            </div>
+            <div class="card">
+
+                <div class="card-top">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="eye"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>Total Views</h3>
+
+                <h2 id="totalViews">0</h2>
+
+                <p id="viewGrowth">
+                    —
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- CONTENT -->
+
+        <section class="content-grid">
+
+            <!-- LEFT -->
+
+            <div class="activity">
+
+                <div class="section-title">
+
+                    <h2>
+
+                        Recent Activity
+
+                    </h2>
+
+                    <button id="viewAllActivities" type="button" hidden>
+
+                        View All
+
+                    </button>
+
+                </div>
+
+                <div class="activity-list" id="activityList" aria-live="polite">
+                    <div class="activity-item">
+                        <p>Loading activity...</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="right-column">
+
+                <div class="quick-actions">
+
+                    <h2>
+
+                        Quick Actions
+
+                    </h2>
+
+                    <div class="action-grid">
+
+                        <a href="add-novel.html" class="add-novel-btn">
+                            Add Novel
+                        </a>
+
+                        <button>
+
+                            Add Chapter
+
+                        </button>
+
+                        <button>
+
+                            Manage Genres
+
+                        </button>
+
+                        <button>
+
+                            Manage Users
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="top-novels">
+
+                    <div class="section-title">
+
+                        <h2>
+
+                            Top Novels
+
+                        </h2>
+
+                        <button>
+
+                            View All
+
+                        </button>
+
+                    </div>
+
+                    <div class="novel">
+
+                        <strong>
+
+                            Reverend Insanity
+
+                        </strong>
+
+                        <span>
+
+                            45.2K views
+
+                        </span>
+
+                    </div>
+
+                    <div class="novel">
+
+                        <strong>
+
+                            Martial World
+
+                        </strong>
+
+                        <span>
+
+                            28.7K views
+
+                        </span>
+
+                    </div>
+
+                    <div class="novel">
+
+                        <strong>
+
+                            The Legendary Mechanic
+
+                        </strong>
+
+                        <span>
+
+                            16.4K views
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+<script type="module" src="js/dashboard.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>

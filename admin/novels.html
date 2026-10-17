@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Management | Lazy Mochi CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/novels.css">
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Lazy Mochi">
+            <div><h2>Lazy Mochi</h2><span>CMS</span></div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html"><i data-lucide="house"></i><span>Dashboard</span></a>
+            <a href="novels.html" class="active"><i data-lucide="notebook-tabs"></i><span>Novel Management</span></a>
+            <a href="chapters.html"><i data-lucide="list-tree"></i><span>Chapter Management</span></a>
+            <a href="genres.html"><i data-lucide="blocks"></i><span>Genre Management</span></a>
+            <a href="users.html"><i data-lucide="users"></i><span>Users</span></a>
+            <a href="bookmarks.html"><i data-lucide="heart"></i><span>Bookmarks</span></a>
+            <a href="analytics.html"><i data-lucide="chart-no-axes-combined"></i><span>Analytics</span></a>
+            <a href="settings.html"><i data-lucide="settings"></i><span>Settings</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="back-home"><i data-lucide="house"></i><span>Back to Website</span></a>
+            <button id="logoutBtn" type="button"><i data-lucide="log-out"></i><span>Logout</span></button>
+            <p>© 2026 Lazy Mochi</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-btn" id="menuBtn" type="button" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+                <div class="breadcrumb"><a href="index.html">Dashboard</a><i data-lucide="chevron-right"></i><strong>Novel Management</strong></div>
+            </div>
+            <div class="topbar-right">
+                <label class="global-search">
+                    <input id="globalNovelSearch" type="search" placeholder="Search anything..." aria-label="Search novels">
+                    <i data-lucide="search"></i>
+                </label>
+                <div class="profile">
+                    <img src="../images/avatar.png" alt="Admin">
+                    <div class="profile-info"><strong id="adminName">Sarah Admin</strong><span>Administrator</span></div>
+                    <button class="icon-button profile-arrow" type="button" aria-label="Open profile menu"><i data-lucide="chevron-down"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div><h1>Novel Management</h1><p>Manage all novels in the system. Add, edit, or remove novels anytime.</p></div>
+                <a class="add-novel-btn" href="add-novel.html"><i data-lucide="plus"></i>Add Novel</a>
+            </div>
+
+            <section class="filter-panel" aria-label="Novel filters">
+                <label class="novel-search"><input id="novelSearch" type="search" placeholder="Search novel title or author..."><i data-lucide="search"></i></label>
+                <label class="select-field"><span>Status</span><select id="statusFilter"><option value="">All Status</option><option>Ongoing</option><option>Completed</option></select></label>
+                <label class="select-field"><span>Genre</span><select id="genreFilter"><option value="">All Genre</option><option>Action</option><option>Fantasy</option><option>Adventure</option><option>Martial Arts</option></select></label>
+                <label class="select-field"><span>Language</span><select id="languageFilter"><option value="">All Language</option><option>Chinese</option><option>English</option><option>Korean</option><option>Japanese</option></select></label>
+                <button class="reset-btn" id="resetFilter" type="button"><i data-lucide="rotate-ccw"></i>Reset Filter</button>
+            </section>
+
+            <section class="table-card">
+                <div class="table-scroll">
+                    <table>
+                        <thead><tr><th>#</th><th>Cover</th><th>Title</th><th>Author</th><th>Status</th><th>Chapters</th><th>Views</th><th>Bookmarks</th><th>Updated At</th><th>Actions</th></tr></thead>
+                        <tbody id="novelTableBody"><tr><td colspan="10">Loading novels...</td></tr></tbody>
+                    </table>
+                </div>
+                <footer class="table-footer">
+                    <p id="tableSummary">Loading novels...</p>
+                    <nav class="pagination" id="novelPagination" aria-label="Novel pages"></nav>
+                </footer>
+            </section>
+        </section>
+    </main>
+</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));</script>
+<script type="module" src="js/novels.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>

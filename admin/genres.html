@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre Management | Lazy Mochi CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/novels.css">
+    <style>
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-20px);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #101114;
+            margin: 0;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #777a82;
+            padding: 4px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close-btn:hover {
+            background: #f1f2f4;
+            color: #101114;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-form .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .modal-form label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #101114;
+        }
+
+        .modal-form input,
+        .modal-form textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #dfe2e7;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .modal-form input:focus,
+        .modal-form textarea:focus {
+            border-color: #101114;
+        }
+
+        .modal-form textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .modal-actions button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .btn-cancel {
+            background: #f1f2f4;
+            color: #101114;
+        }
+
+        .btn-cancel:hover {
+            background: #e3e5e9;
+        }
+
+        .btn-save {
+            background: #050505;
+            color: #ffffff;
+        }
+
+        .btn-save:hover {
+            background: #222222;
+        }
+
+        /* Override badge genre */
+        .genre-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f0f2f5;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #33363f;
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Lazy Mochi">
+            <div><h2>Lazy Mochi</h2><span>CMS</span></div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html"><i data-lucide="house"></i><span>Dashboard</span></a>
+            <a href="novels.html"><i data-lucide="notebook-tabs"></i><span>Novel Management</span></a>
+            <a href="chapters.html"><i data-lucide="list-tree"></i><span>Chapter Management</span></a>
+            <a href="genres.html" class="active"><i data-lucide="blocks"></i><span>Genre Management</span></a>
+            <a href="users.html"><i data-lucide="users"></i><span>Users</span></a>
+            <a href="bookmarks.html"><i data-lucide="heart"></i><span>Bookmarks</span></a>
+            <a href="analytics.html"><i data-lucide="chart-no-axes-combined"></i><span>Analytics</span></a>
+            <a href="settings.html"><i data-lucide="settings"></i><span>Settings</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="back-home"><i data-lucide="house"></i><span>Back to Website</span></a>
+            <button id="logoutBtn" type="button"><i data-lucide="log-out"></i><span>Logout</span></button>
+            <p>© 2026 Lazy Mochi</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-btn" id="menuBtn" type="button" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+                <div class="breadcrumb"><a href="index.html">Dashboard</a><i data-lucide="chevron-right"></i><strong>Genre Management</strong></div>
+            </div>
+            <div class="topbar-right">
+                <label class="global-search">
+                    <input id="globalGenreSearch" type="search" placeholder="Search genre..." aria-label="Search genres">
+                    <i data-lucide="search"></i>
+                </label>
+                <div class="profile">
+                    <img src="../images/avatar.png" alt="Admin">
+                    <div class="profile-info"><strong id="adminName">Admin</strong><span>Administrator</span></div>
+                    <button class="icon-button profile-arrow" type="button" aria-label="Open profile menu"><i data-lucide="chevron-down"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <h1>Genre Management</h1>
+                    <p>Atur kategori dan genre novel yang tersedia di platform.</p>
+                </div>
+                <button class="add-novel-btn" id="openAddGenreModalBtn" type="button">
+                    <i data-lucide="plus"></i>Tambah Genre
+                </button>
+            </div>
+
+            <section class="table-card">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 60px; text-align: center;">#</th>
+                                <th style="width: 200px;">Nama Genre</th>
+                                <th>Deskripsi</th>
+                                <th style="width: 140px; text-align: center;">Jumlah Novel</th>
+                                <th style="width: 120px; text-align: center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="genreTableBody">
+                            <tr><td colspan="5" style="text-align: center; color: #777a82;">Memuat genre...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="table-footer">
+                    <p id="tableSummary">Memuat data...</p>
+                </footer>
+            </section>
+        </section>
+    </main>
+</div>
+
+<!-- Modal Dialog Tambah/Edit Genre -->
+<div class="modal-overlay" id="genreModal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h2 id="modalTitle">Tambah Genre</h2>
+            <button class="modal-close-btn" id="closeModalBtn" type="button">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <form class="modal-form" id="genreForm">
+            <input type="hidden" id="genreId">
+            <div class="form-field">
+                <label for="genreName">Nama Genre <span style="color:red">*</span></label>
+                <input type="text" id="genreName" placeholder="Contoh: Fantasy, Romance, Action" required>
+            </div>
+            <div class="form-field">
+                <label for="genreDescription">Deskripsi (Opsional)</label>
+                <textarea id="genreDescription" placeholder="Deskripsi singkat mengenai genre ini..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" id="cancelModalBtn">Batal</button>
+                <button type="submit" class="btn-save" id="saveGenreBtn">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+</script>
+<script type="module" src="js/genres.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>

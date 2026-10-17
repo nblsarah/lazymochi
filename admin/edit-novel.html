@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Novel | Lazy Mochi CMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/novels.css">
+    <link rel="stylesheet" href="css/add-novel.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <img src="../images/logo.png" alt="Lazy Mochi">
+
+            <div>
+                <h2>Lazy Mochi</h2>
+                <span>CMS</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html">
+                <i data-lucide="house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="novels.html" class="active">
+                <i data-lucide="notebook-tabs"></i>
+                <span>Novel Management</span>
+            </a>
+
+            <a href="chapters.html">
+                <i data-lucide="list-tree"></i>
+                <span>Chapter Management</span>
+            </a>
+
+            <a href="genres.html">
+                <i data-lucide="blocks"></i>
+                <span>Genre Management</span>
+            </a>
+
+            <a href="users.html">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+
+            <a href="bookmarks.html">
+                <i data-lucide="heart"></i>
+                <span>Bookmarks</span>
+            </a>
+
+            <a href="analytics.html">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="settings.html">
+                <i data-lucide="settings"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="back-home">
+                <i data-lucide="house"></i>
+                <span>Back to Website</span>
+            </a>
+
+            <button id="logoutBtn" type="button">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+
+            <p>© 2026 Lazy Mochi</p>
+        </div>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- MAIN -->
+    <!-- ========================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+                <button
+                    class="icon-button menu-btn"
+                    id="menuBtn"
+                    type="button"
+                    aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div class="breadcrumb">
+                    <a href="index.html">Dashboard</a>
+                    <i data-lucide="chevron-right"></i>
+
+                    <a href="novels.html">Novel Management</a>
+                    <i data-lucide="chevron-right"></i>
+
+                    <strong>Edit Novel</strong>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+
+                <label class="global-search">
+                    <input
+                        type="search"
+                        placeholder="Search anything..."
+                        aria-label="Search anything">
+                    <i data-lucide="search"></i>
+                </label>
+
+                <div class="profile">
+                    <img src="../images/avatar.png" alt="Admin">
+
+                    <div class="profile-info">
+                        <strong id="adminName">Sarah Admin</strong>
+                        <span>Administrator</span>
+                    </div>
+
+                    <button
+                        class="icon-button profile-arrow"
+                        type="button"
+                        aria-label="Open profile menu">
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ========================= -->
+        <!-- ADD NOVEL CONTENT -->
+        <!-- ========================= -->
+
+        <section class="add-novel-content">
+
+            <div class="add-novel-heading">
+                <div class="heading-copy">
+                    <h1>Edit Novel</h1>
+                    <p>Update the novel information below.</p>
+                </div>
+
+                <div class="heading-actions">
+                    <a href="novels.html" class="cancel-button">Cancel</a>
+                    <button type="submit" class="save-button" form="addNovelForm">
+                        Save Novel
+                    </button>
+                </div>
+            </div>
+
+            <form id="addNovelForm" class="add-novel-form">
+
+                <section class="novel-form-card">
+
+                    <!-- NOVEL COVER -->
+
+                    <div class="cover-panel">
+                        <h2>Novel Cover</h2>
+
+                        <label class="cover-upload" for="novelCover">
+                            <img id="coverPreview" alt="Novel cover preview">
+
+                            <span class="upload-placeholder" id="uploadPlaceholder">
+                                <span class="upload-icon">
+                                    <i data-lucide="image-up"></i>
+                                </span>
+
+                                <strong>Upload novel cover</strong>
+                                <small>PNG, JPG or WEBP, max. 5 MB</small>
+                                <span class="choose-image-button">Choose Image</span>
+                            </span>
+                        </label>
+
+                        <input
+                            id="novelCover"
+                            name="cover"
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp"
+                            hidden>
+                    </div>
+
+                    <!-- NOVEL INFORMATION -->
+
+                    <div class="information-panel">
+                        <h2>Novel Information</h2>
+
+                        <div class="form-field full-width">
+                            <label for="novelTitle">
+                                Novel Title <span>*</span>
+                            </label>
+                            <input
+                                id="novelTitle"
+                                name="title"
+                                type="text"
+                                placeholder="Enter novel title..."
+                                required>
+                        </div>
+
+                        <div class="form-grid two-columns">
+                            <div class="form-field">
+                                <label for="alternativeTitle">Alternative Title</label>
+                                <input
+                                    id="alternativeTitle"
+                                    name="alternativeTitle"
+                                    type="text"
+                                    placeholder="Enter alternative title (optional)...">
+                            </div>
+
+                            <div class="form-field">
+                                <label for="novelAuthor">
+                                    Author <span>*</span>
+                                </label>
+                                <input
+                                    id="novelAuthor"
+                                    name="author"
+                                    type="text"
+                                    placeholder="Enter author name..."
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid two-columns">
+                            <div class="form-field">
+                                <label for="novelStatus">
+                                    Status <span>*</span>
+                                </label>
+                                <select id="novelStatus" name="status" required>
+                                    <option value="" selected disabled>Select status</option>
+                                    <option value="Ongoing">Ongoing</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Hiatus">Hiatus</option>
+                                    <option value="Dropped">Dropped</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="novelLanguage">
+                                    Language <span>*</span>
+                                </label>
+                                <select id="novelLanguage" name="language" required>
+                                    <option value="" selected disabled>Select language</option>
+                                    <option value="Chinese">Chinese</option>
+                                    <option value="English">English</option>
+                                    <option value="Japanese">Japanese</option>
+                                    <option value="Korean">Korean</option>
+                                    <option value="Indonesian">Indonesian</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-field full-width">
+
+                <label for="genreDropdown">
+                    Genre <span>*</span>
+                </label>
+
+                <div class="genre-select" id="genreDropdown">
+
+                    <!-- SELECTED AREA -->
+
+                    <button
+                        type="button"
+                        class="genre-select-button"
+                        id="genreSelectButton">
+
+                        <span id="genrePlaceholder">
+                            Select genres...
+                        </span>
+
+                        <i data-lucide="chevron-down"></i>
+
+                    </button>
+
+
+                    <!-- DROPDOWN -->
+
+                    <div
+                        class="genre-dropdown"
+                        id="genreDropdownMenu">
+
+                        <label class="genre-option">
+
+                            <input
+                                type="checkbox"
+                                name="genres"
+                                value="Action">
+
+                            <span>Action</span>
+
+                        </label>
+
+
+                        <label class="genre-option">
+
+                            <input
+                                type="checkbox"
+                                name="genres"
+                                value="Fantasy">
+
+                            <span>Fantasy</span>
+
+                        </label>
+
+
+                        <label class="genre-option">
+
+                            <input
+                                type="checkbox"
+                                name="genres"
+                                value="Adventure">
+
+                            <span>Adventure</span>
+
+                        </label>
+
+
+                        <label class="genre-option">
+
+                            <input
+                                type="checkbox"
+                                name="genres"
+                                value="Martial Arts">
+
+                            <span>Martial Arts</span>
+
+                        </label>
+
+
+                        <label class="genre-option">
+
+                            <input
+                                type="checkbox"
+                                name="genres"
+                                value="Romance">
+
+                            <span>Romance</span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <small class="field-help">
+                    Select one or more genres.
+                </small>
+
+            </div>
+
+                        <div class="form-field full-width">
+                            <label for="novelSynopsis">
+                                Synopsis <span>*</span>
+                            </label>
+                            <textarea
+                                id="novelSynopsis"
+                                name="synopsis"
+                                rows="4"
+                                placeholder="Enter synopsis..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-field full-width">
+                            <label for="sourceUrl">Source URL</label>
+                            <input
+                                id="sourceUrl"
+                                name="sourceUrl"
+                                type="url"
+                                placeholder="Enter source URL (optional)...">
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- PUBLISHING SETTINGS -->
+
+                <section class="publishing-card">
+                    <h2>Publishing Settings</h2>
+
+                    <div class="publishing-grid">
+                        <div class="form-field">
+                            <label for="releaseYear">Release Year</label>
+                            <input
+                                id="releaseYear"
+                                name="releaseYear"
+                                type="number"
+                                min="1900"
+                                max="2100"
+                                placeholder="Select release year">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="translationStatus">Translation Status</label>
+                            <select id="translationStatus" name="translationStatus">
+                                <option value="" selected>Select translation status</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Paused">Paused</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="visibility">
+                                Visibility <span>*</span>
+                            </label>
+                            <select id="visibility" name="visibility" required>
+                                <option value="" selected disabled>Select visibility</option>
+                                <option value="Published">Published</option>
+                                <option value="Draft">Draft</option>
+                                <option value="Private">Private</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="bottom-actions">
+                    <a href="novels.html" class="cancel-button">Cancel</a>
+                    <button type="submit" class="save-button">Save Novel</button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    lucide.createIcons();
+
+    document
+        .getElementById("menuBtn")
+        .addEventListener("click", () => {
+            document
+                .getElementById("sidebar")
+                .classList
+                .toggle("open");
+        });
+
+    const coverInput = document.getElementById("novelCover");
+    const coverPreview = document.getElementById("coverPreview");
+    const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+
+    coverInput.addEventListener("change", () => {
+        const file = coverInput.files[0];
+
+        if (!file) return;
+
+        coverPreview.src = URL.createObjectURL(file);
+        coverPreview.classList.add("visible");
+        uploadPlaceholder.hidden = true;
+    });
+
+    // =========================
+// GENRE MULTI SELECT
+// =========================
+
+const genreSelect =
+    document.getElementById("genreDropdown");
+
+const genreButton =
+    document.getElementById("genreSelectButton");
+
+const genrePlaceholder =
+    document.getElementById("genrePlaceholder");
+
+const genreCheckboxes =
+    document.querySelectorAll(
+        'input[name="genres"]'
+    );
+
+
+// OPEN / CLOSE
+
+genreButton.addEventListener("click", (event) => {
+
+    event.stopPropagation();
+
+    genreSelect.classList.toggle("open");
+
+});
+
+
+// UPDATE SELECTED GENRES
+
+genreCheckboxes.forEach((checkbox) => {
+
+    checkbox.addEventListener("change", () => {
+
+        updateSelectedGenres();
+
+    });
+
+});
+
+
+function updateSelectedGenres(){
+
+    const selected = Array.from(
+        genreCheckboxes
+    )
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => checkbox.value);
+
+
+    if(selected.length === 0){
+
+        genrePlaceholder.textContent =
+            "Select genres...";
+
+        genrePlaceholder.classList.remove(
+            "genre-selected"
+        );
+
+        return;
+
+    }
+
+
+    genrePlaceholder.textContent =
+        selected.join(", ");
+
+    genrePlaceholder.classList.add(
+        "genre-selected"
+    );
+
+}
+
+
+// CLICK OUTSIDE
+
+document.addEventListener("click", (event) => {
+
+    if(!genreSelect.contains(event.target)){
+
+        genreSelect.classList.remove("open");
+
+    }
+
+});
+</script>
+<script
+    type="module"
+    src="js/edit-novel.js">
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>

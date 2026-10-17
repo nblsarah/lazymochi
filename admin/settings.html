@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Lazy Mochi CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/novels.css">
+    <style>
+        .settings-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .settings-nav {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .settings-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: #646770;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .settings-nav-item:hover {
+            background: #f1f2f4;
+            color: #101114;
+        }
+
+        .settings-nav-item.active {
+            background: #050505;
+            color: #ffffff;
+        }
+
+        .settings-nav-item i {
+            width: 18px;
+            height: 18px;
+        }
+
+        .settings-section {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 28px;
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #101114;
+            margin: 0 0 6px;
+        }
+
+        .settings-section p {
+            font-size: 13px;
+            color: #646770;
+            margin: 0 0 24px;
+        }
+
+        .avatar-upload-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .settings-avatar-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dfe2e7;
+        }
+
+        .btn-upload-avatar {
+            padding: 8px 16px;
+            border: 1px solid #dfe2e7;
+            border-radius: 8px;
+            background: #ffffff;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-upload-avatar:hover {
+            background: #f1f2f4;
+        }
+
+        .settings-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .settings-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .settings-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .settings-field label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #101114;
+        }
+
+        .settings-field input,
+        .settings-field textarea,
+        .settings-field select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #dfe2e7;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .settings-field input:focus,
+        .settings-field textarea:focus {
+            border-color: #101114;
+        }
+
+        .settings-field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-save-settings {
+            padding: 12px 24px;
+            background: #050505;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-save-settings:hover {
+            background: #222222;
+        }
+
+        .btn-save-settings:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 850px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+            .settings-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Lazy Mochi">
+            <div><h2>Lazy Mochi</h2><span>CMS</span></div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html"><i data-lucide="house"></i><span>Dashboard</span></a>
+            <a href="novels.html"><i data-lucide="notebook-tabs"></i><span>Novel Management</span></a>
+            <a href="chapters.html"><i data-lucide="list-tree"></i><span>Chapter Management</span></a>
+            <a href="genres.html"><i data-lucide="blocks"></i><span>Genre Management</span></a>
+            <a href="users.html"><i data-lucide="users"></i><span>Users</span></a>
+            <a href="bookmarks.html"><i data-lucide="heart"></i><span>Bookmarks</span></a>
+            <a href="analytics.html"><i data-lucide="chart-no-axes-combined"></i><span>Analytics</span></a>
+            <a href="settings.html" class="active"><i data-lucide="settings"></i><span>Settings</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="back-home"><i data-lucide="house"></i><span>Back to Website</span></a>
+            <button id="logoutBtn" type="button"><i data-lucide="log-out"></i><span>Logout</span></button>
+            <p>© 2026 Lazy Mochi</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-btn" id="menuBtn" type="button" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+                <div class="breadcrumb"><a href="index.html">Dashboard</a><i data-lucide="chevron-right"></i><strong>Settings</strong></div>
+            </div>
+            <div class="topbar-right">
+                <div class="profile">
+                    <img id="topbarAvatar" src="../images/avatar.png" alt="Admin">
+                    <div class="profile-info"><strong id="adminName">Admin</strong><span>Administrator</span></div>
+                    <button class="icon-button profile-arrow" type="button" aria-label="Open profile menu"><i data-lucide="chevron-down"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <h1>Settings</h1>
+                    <p>Kelola profil admin, pengaturan situs, dan keamanan akun Anda.</p>
+                </div>
+            </div>
+
+            <div class="settings-container">
+                <!-- Navigation Tabs -->
+                <nav class="settings-nav">
+                    <button type="button" class="settings-nav-item active" data-tab="tab-profile">
+                        <i data-lucide="user"></i> Admin Profile
+                    </button>
+                    <button type="button" class="settings-nav-item" data-tab="tab-website">
+                        <i data-lucide="globe"></i> Website Settings
+                    </button>
+                    <button type="button" class="settings-nav-item" data-tab="tab-security">
+                        <i data-lucide="shield-check"></i> Security
+                    </button>
+                </nav>
+
+                <!-- Content Sections -->
+                <div class="settings-content">
+                    <!-- Tab 1: Profile Settings -->
+                    <section class="settings-section active" id="tab-profile">
+                        <h2>Admin Profile</h2>
+                        <p>Perbarui informasi identitas profil dan foto avatar Anda.</p>
+
+                        <form id="profileForm">
+                            <div class="avatar-upload-wrapper">
+                                <img id="avatarPreview" src="../images/avatar.png" alt="Avatar" class="settings-avatar-preview">
+                                <div>
+                                    <button type="button" class="btn-upload-avatar" id="btnBrowseAvatar">Ganti Avatar</button>
+                                    <input type="file" id="avatarInput" accept="image/*" hidden>
+                                    <span style="display: block; font-size: 11px; color: #646770; margin-top: 6px;">JPG, PNG, atau WEBP. Maks 2 MB.</span>
+                                </div>
+                            </div>
+
+                            <div class="settings-form-grid">
+                                <div class="settings-field">
+                                    <label for="username">Username Admin</label>
+                                    <input type="text" id="username" placeholder="Username" required>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="email">Email (Read-only)</label>
+                                    <input type="email" id="email" disabled style="background: #f8f9fa;">
+                                </div>
+                            </div>
+
+                            <div class="settings-field">
+                                <label for="bio">Bio / Catatan Ringkas</label>
+                                <textarea id="bio" placeholder="Tuliskan catatan singkat profil Anda..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-save-settings" id="btnSaveProfile">
+                                <i data-lucide="save"></i> Simpan Profil
+                            </button>
+                        </form>
+                    </section>
+
+                    <!-- Tab 2: Website Settings -->
+                    <section class="settings-section" id="tab-website">
+                        <h2>Website Settings</h2>
+                        <p>Konfigurasi nama situs, pengumuman, dan deskripsi publik platform.</p>
+
+                        <form id="websiteForm">
+                            <div class="settings-form-grid">
+                                <div class="settings-field">
+                                    <label for="siteName">Nama Platform / Site</label>
+                                    <input type="text" id="siteName" placeholder="Lazy Mochi" required>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="contactEmail">Email Kontak Publik</label>
+                                    <input type="email" id="contactEmail" placeholder="support@lazymochi.com">
+                                </div>
+                            </div>
+
+                            <div class="settings-field">
+                                <label for="announcementBanner">Teks Pengumuman (Banner Atas)</label>
+                                <input type="text" id="announcementBanner" placeholder="Contoh: Nikmati update chapter terbaru setiap hari pukul 19:00 WIB!">
+                            </div>
+
+                            <div class="settings-field">
+                                <label for="siteDescription">Deskripsi Situs (SEO & Footer)</label>
+                                <textarea id="siteDescription" placeholder="Platform baca novel online gratis terbaik..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-save-settings" id="btnSaveWebsite">
+                                <i data-lucide="save"></i> Simpan Pengaturan Situs
+                            </button>
+                        </form>
+                    </section>
+
+                    <!-- Tab 3: Security Settings -->
+                    <section class="settings-section" id="tab-security">
+                        <h2>Security</h2>
+                        <p>Perbarui kata sandi akun admin Anda untuk keamanan.</p>
+
+                        <form id="securityForm">
+                            <div class="settings-field">
+                                <label for="currentPassword">Password Saat Ini</label>
+                                <input type="password" id="currentPassword" placeholder="••••••••" required>
+                            </div>
+
+                            <div class="settings-form-grid">
+                                <div class="settings-field">
+                                    <label for="newPassword">Password Baru</label>
+                                    <input type="password" id="newPassword" placeholder="Min. 6 karakter" required minlength="6">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="confirmPassword">Konfirmasi Password Baru</label>
+                                    <input type="password" id="confirmPassword" placeholder="Min. 6 karakter" required minlength="6">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-save-settings" id="btnSaveSecurity">
+                                <i data-lucide="shield-check"></i> Ubah Password
+                            </button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+</script>
+<script type="module" src="js/settings.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Chapter | Lazy Mochi CMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/chapters.css">
+    <link rel="stylesheet" href="css/add-chapter.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <img
+                src="../images/logo.png"
+                alt="Lazy Mochi">
+
+            <div>
+                <h2>Lazy Mochi</h2>
+                <span>CMS</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="index.html">
+                <i data-lucide="house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="novels.html">
+                <i data-lucide="notebook-tabs"></i>
+                <span>Novel Management</span>
+            </a>
+
+            <a href="chapters.html" class="active">
+                <i data-lucide="list-tree"></i>
+                <span>Chapter Management</span>
+            </a>
+
+            <a href="genres.html">
+                <i data-lucide="blocks"></i>
+                <span>Genre Management</span>
+            </a>
+
+            <a href="users.html">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+
+            <a href="bookmarks.html">
+                <i data-lucide="heart"></i>
+                <span>Bookmarks</span>
+            </a>
+
+            <a href="analytics.html">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="settings.html">
+                <i data-lucide="settings"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a
+                href="../index.html"
+                class="back-home">
+
+                <i data-lucide="house"></i>
+                <span>Back to Website</span>
+
+            </a>
+
+            <button
+                id="logoutBtn"
+                type="button">
+
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+
+            </button>
+
+            <p>© 2026 Lazy Mochi</p>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-btn"
+                    id="menuBtn"
+                    type="button">
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+                <div class="breadcrumb">
+
+                    <a href="chapters.html">
+                        Chapter Management
+                    </a>
+
+                    <i data-lucide="chevron-right"></i>
+
+                    <strong>
+                        Add Chapter
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <label class="global-search">
+
+                    <input
+                        type="search"
+                        placeholder="Search anything..."
+                        aria-label="Search anything">
+
+                    <i data-lucide="search"></i>
+
+                </label>
+
+
+                <div class="profile">
+
+                    <img
+                        src="../images/avatar.png"
+                        alt="Admin">
+
+                    <div class="profile-info">
+
+                        <strong id="adminName">
+                            Sarah Admin
+                        </strong>
+
+                        <span>
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <section class="chapters-content">
+
+            <div class="chapters-heading">
+
+                <div class="heading-copy">
+
+                    <h1>
+                        Add Chapter
+                    </h1>
+
+                    <p>
+                        Add a new chapter to your novel.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM CARD -->
+            <div class="chapters-card add-chapter-card">
+
+                <form id="addChapterForm">
+
+
+                    <!-- NOVEL -->
+                    <div class="form-field">
+
+                        <label for="novelId">
+                            Novel <span>*</span>
+                        </label>
+
+                        <select
+                            id="novelId"
+                            required>
+
+                            <option value="">
+                                Select novel...
+                            </option>
+
+                        </select>
+
+                        <small class="field-help">
+                            Select the novel this chapter belongs to.
+                        </small>
+
+                    </div>
+
+
+                    <!-- CHAPTER NUMBER -->
+                    <div class="form-field">
+
+                        <label for="chapterNumber">
+                            Chapter Number <span>*</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="chapterNumber"
+                            min="1"
+                            placeholder="e.g. 1"
+                            required>
+
+                    </div>
+
+
+                    <!-- CHAPTER TITLE -->
+                    <div class="form-field full-width">
+
+                        <label for="chapterTitle">
+                            Chapter Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="chapterTitle"
+                            placeholder="e.g. The Beginning">
+
+                    </div>
+
+
+                    <!-- STATUS -->
+                    <div class="form-field">
+
+                        <label for="chapterStatus">
+                            Status <span>*</span>
+                        </label>
+
+                        <select
+                            id="chapterStatus"
+                            required>
+
+                            <option value="">
+                                Select status...
+                            </option>
+
+                            <option value="draft">
+                                Draft
+                            </option>
+
+                            <option value="scheduled">
+                                Scheduled
+                            </option>
+
+                            <option value="published">
+                                Published
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PUBLISH DATE -->
+                    <div class="form-field">
+
+                        <label for="publishDate">
+                            Publish Date
+                        </label>
+
+                        <input
+                            type="datetime-local"
+                            id="publishDate">
+
+                        <small class="field-help">
+                            Required for scheduled chapters.
+                        </small>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+                    <div class="form-field full-width">
+
+    <label>
+        Chapter Content <span>*</span>
+    </label>
+
+    <div class="txt-upload" id="txtUpload">
+
+        <input
+            type="file"
+            id="chapterFile"
+            accept=".txt,text/plain"
+            hidden>
+
+        <div class="txt-upload-icon">
+            <i data-lucide="file-text"></i>
+        </div>
+
+        <strong>
+            Upload Chapter TXT
+        </strong>
+
+        <span>
+            Drag & drop your TXT file here
+            or click to browse
+        </span>
+
+        <small>
+            Only .txt files are supported.
+        </small>
+
+        <button
+            type="button"
+            id="browseTxtButton">
+            Choose TXT File
+        </button>
+
+    </div>
+
+    <div
+        class="selected-file"
+        id="selectedFile"
+        hidden>
+
+        <i data-lucide="file-text"></i>
+
+        <div>
+            <strong id="fileName">
+                Chapter.txt
+            </strong>
+
+            <small id="fileSize">
+                0 KB
+            </small>
+        </div>
+
+        <button
+            type="button"
+            id="removeFile"
+            aria-label="Remove file">
+
+            <i data-lucide="x"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+                    <!-- ACTIONS -->
+                    <div class="form-actions">
+
+                        <a
+                            href="chapters.html"
+                            class="cancel-button">
+
+                            Cancel
+
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="save-button">
+
+                            <i data-lucide="save"></i>
+
+                            Save Chapter
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    lucide.createIcons();
+
+    document
+        .getElementById("menuBtn")
+        .addEventListener("click", () => {
+
+            document
+                .getElementById("sidebar")
+                .classList
+                .toggle("open");
+
+        });
+</script>
+
+
+<script
+    type="module"
+    src="js/add-chapter.js">
+</script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Management | Lazy Mochi CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/novels.css">
+    <style>
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e3e5e9;
+        }
+
+        .user-info-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-info-details strong {
+            display: block;
+            font-size: 13px;
+            color: #101114;
+        }
+
+        .user-info-details span {
+            font-size: 11px;
+            color: #646770;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .role-badge.admin {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .role-badge.user {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+
+        .role-badge i {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .role-badge.admin i { background: #dc2626; }
+        .role-badge.user i { background: #0284c7; }
+
+        .select-role-dropdown {
+            padding: 6px 10px;
+            border: 1px solid #dfe2e7;
+            border-radius: 8px;
+            font-size: 12px;
+            background: #ffffff;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .select-role-dropdown:focus {
+            border-color: #101114;
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Lazy Mochi">
+            <div><h2>Lazy Mochi</h2><span>CMS</span></div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html"><i data-lucide="house"></i><span>Dashboard</span></a>
+            <a href="novels.html"><i data-lucide="notebook-tabs"></i><span>Novel Management</span></a>
+            <a href="chapters.html"><i data-lucide="list-tree"></i><span>Chapter Management</span></a>
+            <a href="genres.html"><i data-lucide="blocks"></i><span>Genre Management</span></a>
+            <a href="users.html" class="active"><i data-lucide="users"></i><span>Users</span></a>
+            <a href="bookmarks.html"><i data-lucide="heart"></i><span>Bookmarks</span></a>
+            <a href="analytics.html"><i data-lucide="chart-no-axes-combined"></i><span>Analytics</span></a>
+            <a href="settings.html"><i data-lucide="settings"></i><span>Settings</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="back-home"><i data-lucide="house"></i><span>Back to Website</span></a>
+            <button id="logoutBtn" type="button"><i data-lucide="log-out"></i><span>Logout</span></button>
+            <p>© 2026 Lazy Mochi</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-btn" id="menuBtn" type="button" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+                <div class="breadcrumb"><a href="index.html">Dashboard</a><i data-lucide="chevron-right"></i><strong>Users</strong></div>
+            </div>
+            <div class="topbar-right">
+                <label class="global-search">
+                    <input id="globalUserSearch" type="search" placeholder="Search user..." aria-label="Search users">
+                    <i data-lucide="search"></i>
+                </label>
+                <div class="profile">
+                    <img src="../images/avatar.png" alt="Admin">
+                    <div class="profile-info"><strong id="adminName">Admin</strong><span>Administrator</span></div>
+                    <button class="icon-button profile-arrow" type="button" aria-label="Open profile menu"><i data-lucide="chevron-down"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <h1>User Management</h1>
+                    <p>Kelola daftar pengguna terdaftar, peran akses, dan akun pengguna sistem.</p>
+                </div>
+            </div>
+
+            <section class="filter-panel" aria-label="User filters" style="grid-template-columns: minmax(270px, 2fr) minmax(180px, 1fr) auto;">
+                <label class="novel-search">
+                    <input id="userSearch" type="search" placeholder="Search username or email...">
+                    <i data-lucide="search"></i>
+                </label>
+                <label class="select-field">
+                    <span>Filter Role</span>
+                    <select id="roleFilter">
+                        <option value="">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </label>
+                <button class="reset-btn" id="resetFilter" type="button">
+                    <i data-lucide="rotate-ccw"></i>Reset Filter
+                </button>
+            </section>
+
+            <section class="table-card">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 55px; text-align: center;">#</th>
+                                <th style="width: 250px;">Pengguna</th>
+                                <th style="width: 220px;">Email</th>
+                                <th style="width: 130px; text-align: center;">Role</th>
+                                <th style="width: 160px; text-align: center;">Ubah Role</th>
+                                <th style="width: 150px;">Tanggal Daftar</th>
+                                <th style="width: 100px; text-align: center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr><td colspan="7" style="text-align: center; color: #777a82;">Memuat data pengguna...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="table-footer">
+                    <p id="tableSummary">Memuat pengguna...</p>
+                    <nav class="pagination" id="userPagination" aria-label="User pages"></nav>
+                </footer>
+            </section>
+        </section>
+    </main>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+</script>
+<script type="module" src="js/users.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Script Global Profil & Auth -->
+<script type="module" src="js/common-auth.js"></script>
+
+<!-- Script Khusus Halaman Ini -->
+<script type="module" src="js/halaman-spesifik.js"></script>
+</body>
+</html>
